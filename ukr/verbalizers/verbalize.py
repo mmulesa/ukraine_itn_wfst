@@ -6,6 +6,7 @@ from ukr.verbalizers.decimal import DecimalFst
 from ukr.verbalizers.measure import MeasureFst
 from ukr.verbalizers.money import MoneyFst
 from ukr.verbalizers.ordinal import OrdinalFst
+from ukr.verbalizers.telephone import TelephoneFst
 from pynini.lib import pynutil
 
 from ukr.verbalizers.word import WordFst
@@ -24,6 +25,7 @@ class VerbalizeFst(GraphFst):
         self.date = DateFst()
         self.time = TimeFst()
         self.word = WordFst()
+        self.telephone = TelephoneFst() 
 
         graph = (
                 self.time.fst
@@ -33,6 +35,7 @@ class VerbalizeFst(GraphFst):
                 | self.ordinal.fst
                 | self.decimal.fst
                 | self.cardinal.fst
+                | self.telephone.fst
         )
         graph |= pynutil.add_weight(self.word.fst, 100)
 
@@ -47,6 +50,7 @@ class VerbalizeFst(GraphFst):
                 | self.ordinal.as_json()
                 | self.decimal.as_json()
                 | self.cardinal.as_json()
+                | self.telephone.as_json()
         )
 
         graph |= pynutil.add_weight(self.word.as_json(), 100)
