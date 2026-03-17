@@ -11,6 +11,7 @@ from ukr.taggers.ordinal import OrdinalFst
 from ukr.taggers.time import TimeFst
 from ukr.taggers.word import WordFst
 from ukr.taggers.telephone import TelephoneFst
+from ukr.taggers.fraction import FractionFst
 
 
 class ClassifyFst(GraphFst):
@@ -33,9 +34,11 @@ class ClassifyFst(GraphFst):
         word_graph = WordFst().fst
         money_graph = MoneyFst(cardinal=cardinal, decimal=decimal).fst
         telephone_graph = TelephoneFst().fst
+        fraction_graph = FractionFst(cardinal=cardinal).fst
 
         classify = (
                 pynutil.add_weight(telephone_graph, 1.0)
+                | pynutil.add_weight(fraction_graph, 1.0)
                 | pynutil.add_weight(decimal_graph, 1.1)
                 | pynutil.add_weight(measure_graph, 1.1)
                 | pynutil.add_weight(cardinal_graph, 1.1)
