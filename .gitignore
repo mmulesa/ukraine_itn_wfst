@@ -1,6 +1,26 @@
-/.idea/
-/env/
+# -----------------------------
+# Virtual environment
+# -----------------------------
+venv/
 
-/tests/__pycache__/
+# -----------------------------
+# Python cache and bytecode
+# -----------------------------
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*$py.class
 
+# -----------------------------
+# macOS system files
+# -----------------------------
 .DS_Store
+
+# -----------------------------
+# Logs, temporary files, IDEs
+# -----------------------------
+*.log
+*.tmp
+*.swp
+.idea/
+.vscode/
