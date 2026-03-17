@@ -12,6 +12,7 @@ from ukr.taggers.time import TimeFst
 from ukr.taggers.word import WordFst
 from ukr.taggers.telephone import TelephoneFst
 from ukr.taggers.fraction import FractionFst
+from ukr.taggers.digit_sequence import DigitSequenceFst
 
 
 class ClassifyFst(GraphFst):
@@ -35,6 +36,7 @@ class ClassifyFst(GraphFst):
         money_graph = MoneyFst(cardinal=cardinal, decimal=decimal).fst
         telephone_graph = TelephoneFst().fst
         fraction_graph = FractionFst(cardinal=cardinal).fst
+        digit_sequence_graph = DigitSequenceFst(cardinal=cardinal).fst
 
         classify = (
                 pynutil.add_weight(telephone_graph, 1.0)
@@ -46,6 +48,7 @@ class ClassifyFst(GraphFst):
                 | pynutil.add_weight(money_graph, 1.1)
                 | pynutil.add_weight(date_graph, 1.1)
                 | pynutil.add_weight(time_graph, 1.1)
+                | pynutil.add_weight(digit_sequence_graph, 50.0)
                 | pynutil.add_weight(word_graph, 100)
         )
 

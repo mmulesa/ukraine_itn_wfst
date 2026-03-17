@@ -8,6 +8,7 @@ from ukr.verbalizers.money import MoneyFst
 from ukr.verbalizers.ordinal import OrdinalFst
 from ukr.verbalizers.telephone import TelephoneFst
 from ukr.verbalizers.fraction import FractionFst
+from ukr.verbalizers.digit_sequence import DigitSequenceFst
 from pynini.lib import pynutil
 
 from ukr.verbalizers.word import WordFst
@@ -28,6 +29,7 @@ class VerbalizeFst(GraphFst):
         self.word = WordFst()
         self.telephone = TelephoneFst() 
         self.fraction = FractionFst()
+        self.digit_sequence = DigitSequenceFst()
 
         graph = (
                 self.time.fst
@@ -39,6 +41,7 @@ class VerbalizeFst(GraphFst):
                 | self.cardinal.fst
                 | self.telephone.fst
                 | self.fraction.fst
+                | self.digit_sequence.fst
         )
         graph |= pynutil.add_weight(self.word.fst, 100)
 
