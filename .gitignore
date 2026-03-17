@@ -10,6 +10,7 @@ __pycache__/
 .pytest_cache/
 *.py[cod]
 *$py.class
+*.pyc
 
 # -----------------------------
 # macOS system files
